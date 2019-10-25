@@ -19,6 +19,13 @@ class Automobile extends \yii\db\ActiveRecord
 {
     const STATUS_PAID = 1;
     const STATUS_UNPAID = 0;
+
+    const COLORS = [
+        'red' => 'Красный',
+        'green' => 'Зеленый',
+        'blue' => 'Синий',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -33,9 +40,11 @@ class Automobile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['mark', 'model', 'number', 'color'], 'required'],
             [['parking'], 'integer'],
             [['comment'], 'string'],
             [['mark', 'model', 'number', 'color'], 'string', 'max' => 255],
+            ['number', 'match', 'pattern' => '/^[АВЕКМНОРСТУХ]\d{3}(?<!000)[АВЕКМНОРСТУХ]{2}\d{2,3}$/ui']
         ];
     }
 

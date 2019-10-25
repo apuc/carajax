@@ -38,7 +38,12 @@ use yii\helpers\StringHelper;
 					'model',
 					'number',
 					'color',
-					'parking',
+					[
+                        'attribute' =>'parking',
+                        'value' => function(\common\models\Automobile $model){
+			                return \common\models\Automobile::getStatusText()[$model->parking];
+                        }
+                    ],
 					'comment:ntext',
 				],
 			]) ?>
